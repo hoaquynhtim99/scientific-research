@@ -4,9 +4,9 @@ Module quản lý, hiển thị nghiên cứu khoa học của giảng viên qua
 
 Tóm lược một số chức năng:
 
-- Quản lý cấp độ đề tài. Ví dụ: Cấp cơ sở, cấp trường, cấp bộ ...
-- Quản lý lĩnh vực: Ví dụ Khoa học, Công nghệ, Kinh tế, Xã hội nhân văn.
-- Nội dung đề tài quản lý:
+### Quản lý cấp độ đề tài. Ví dụ: Cấp cơ sở, cấp trường, cấp bộ ...
+### Quản lý lĩnh vực: Ví dụ Khoa học, Công nghệ, Kinh tế, Xã hội nhân văn.
+### Nội dung đề tài quản lý:
 + Cấp độ đề tài
 + Lĩnh vực
 + Tên đề tài
