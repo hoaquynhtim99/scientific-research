@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @Project VIDEO SCIENTIFIC RESEARCH 4.x
+ * @Project SCIENTIFIC RESEARCH 4.x
  * @Author PHAN TAN DUNG (phantandung92@gmail.com)
  * @Copyright (C) 2016 PHAN TAN DUNG. All rights reserved
  * @Language Tiếng Việt
