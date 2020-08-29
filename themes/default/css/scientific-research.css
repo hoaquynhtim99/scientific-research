@@ -51,8 +51,8 @@
 }
 
 /* Dropcap */
-.shortcode-dropcap{ margin-top: 2px; margin-bottom: 0px; margin-right: 7px; margin-left: 2px; float: left; font-size: 25px; font-size: 29px; 
-	width: 32px; height: 32px; line-height: 32px; text-align: center; float: left; }
+.shortcode-dropcap{ margin-top: 2px; margin-bottom: 0px; margin-right: 7px; margin-left: 2px; float: left; font-size: 25px; font-size: 29px;
+    width: 32px; height: 32px; line-height: 32px; text-align: center; float: left; }
 .shortcode-dropcap.circle{
     -moz-border-radius: 16px;
     -webkit-border-radius: 16px;

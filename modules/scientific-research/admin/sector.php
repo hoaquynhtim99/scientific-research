@@ -42,11 +42,11 @@ if ($nv_Request->isset_request('changeweight', 'post')) {
     $sql = 'SELECT sectorid FROM ' . NV_PREFIXLANG . '_' . $module_data . '_sector WHERE sectorid=' . $sectorid;
     $sectorid = $db->query($sql)->fetchColumn();
     if (empty($sectorid))
-        die('NO_' . $sectorid);
+        nv_htmlOutput('NO_' . $sectorid);
 
     $new_weight = $nv_Request->get_int('new_weight', 'post', 0);
     if (empty($new_weight))
-        die('NO_' . $module_name);
+        nv_htmlOutput('NO_' . $module_name);
 
     $sql = 'SELECT sectorid FROM ' . NV_PREFIXLANG . '_' . $module_data . '_sector WHERE sectorid!=' . $sectorid . ' ORDER BY weight ASC';
     $result = $db->query($sql);
@@ -79,7 +79,7 @@ if ($nv_Request->isset_request('delete', 'post')) {
     $sectorid = $db->query($sql)->fetchColumn();
 
     if (empty($sectorid))
-        die('NO_' . $sectorid);
+        nv_htmlOutput('NO_' . $sectorid);
 
     $sql = 'DELETE FROM ' . NV_PREFIXLANG . '_' . $module_data . '_sector WHERE sectorid = ' . $sectorid;
 
@@ -100,7 +100,7 @@ if ($nv_Request->isset_request('delete', 'post')) {
 
         $nv_Cache->delMod($module_name);
     } else {
-        die('NO_' . $sectorid);
+        nv_htmlOutput('NO_' . $sectorid);
     }
 
     include NV_ROOTDIR . '/includes/header.php';
@@ -181,8 +181,7 @@ if ($nv_Request->isset_request('submit', 'post')) {
                     }
 
                     $nv_Cache->delMod($module_name);
-                    Header('Location: ' . NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=' . $op);
-                    die();
+                    nv_redirect_location(NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=' . $op);
                 } else {
                     $error = $lang_module['errorsave'];
                 }

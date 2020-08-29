@@ -38,14 +38,14 @@ if ($nv_Request->isset_request('changestatus', 'post')) {
     $id = $nv_Request->get_int('id', 'post', 0);
 
     if (empty($id))
-        die("NO");
+        nv_htmlOutput("NO");
 
     $sql = "SELECT title, status FROM " . NV_PREFIXLANG . "_" . $module_data . "_rows WHERE id=" . $id;
     $result = $db->query($sql);
     list($title, $status) = $result->fetch(3);
 
     if (empty($title))
-        die('NO');
+        nv_htmlOutput('NO');
     $status = $status == 1 ? 0 : 1;
 
     $sql = "UPDATE " . NV_PREFIXLANG . "_" . $module_data . "_rows SET status = " . $status . " WHERE id = " . $id;
@@ -53,7 +53,7 @@ if ($nv_Request->isset_request('changestatus', 'post')) {
 
     $nv_Cache->delMod($module_name);
 
-    die("OK");
+    nv_htmlOutput("OK");
 }
 
 // Delete row
@@ -64,7 +64,7 @@ if ($nv_Request->isset_request('delete', 'post')) {
     $id = $db->query($sql)->fetchColumn();
 
     if (empty($id))
-        die('NO_' . $id);
+        nv_htmlOutput('NO_' . $id);
 
     $sql = 'DELETE FROM ' . NV_PREFIXLANG . '_' . $module_data . '_rows WHERE id = ' . $id;
     $db->query($sql);

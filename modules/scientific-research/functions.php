@@ -8,8 +8,9 @@
  * @Createdate Fri, 10 Jun 2016 02:20:31 GMT
  */
 
-if (!defined('NV_SYSTEM'))
+if (!defined('NV_SYSTEM')) {
     die('Stop!!!');
+}
 
 define('NV_MOD_SCIENTIFIC_RESEARCH', true);
 
@@ -19,11 +20,14 @@ $global_array_level = $nv_Cache->db($sql, 'levelid', $module_name);
 $sql = 'SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . '_sector ORDER BY weight ASC';
 $global_array_sector = $nv_Cache->db($sql, 'sectorid', $module_name);
 
-$array_mod_title = array();
+$array_mod_title = [];
 
 // Xac dinh RSS
 if ($module_info['rss']) {
-    $rss[] = array('title' => $module_info['custom_title'], 'src' => NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=' . $module_info['alias']['rss']);
+    $rss[] = [
+        'title' => $module_info['site_title'],
+        'src' => NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=' . $module_info['alias']['rss']
+    ];
 }
 
 $page = 1;

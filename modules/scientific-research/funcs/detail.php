@@ -51,8 +51,7 @@ if (isset($array_op[1]) and $array_op[1] == 'download') {
     $request_uri = $_SERVER['REQUEST_URI'];
 
     if (!($home or $request_uri == $base_url_rewrite or $request_uri == $page_url_rewrite or NV_MAIN_DOMAIN . $request_uri == $base_url_rewrite or NV_MAIN_DOMAIN . $request_uri == $page_url_rewrite)) {
-        header('Location: ' . $base_url_rewrite);
-        die();
+        nv_redirect_location($base_url_rewrite);
     }
 
     $row['download_href'] = '';

@@ -42,11 +42,11 @@ if ($nv_Request->isset_request('changeweight', 'post')) {
     $sql = 'SELECT levelid FROM ' . NV_PREFIXLANG . '_' . $module_data . '_level WHERE levelid=' . $levelid;
     $levelid = $db->query($sql)->fetchColumn();
     if (empty($levelid))
-        die('NO_' . $levelid);
+        nv_htmlOutput('NO_' . $levelid);
 
     $new_weight = $nv_Request->get_int('new_weight', 'post', 0);
     if (empty($new_weight))
-        die('NO_' . $module_name);
+        nv_htmlOutput('NO_' . $module_name);
 
     $sql = 'SELECT levelid FROM ' . NV_PREFIXLANG . '_' . $module_data . '_level WHERE levelid!=' . $levelid . ' ORDER BY weight ASC';
     $result = $db->query($sql);
@@ -79,7 +79,7 @@ if ($nv_Request->isset_request('delete', 'post')) {
     $levelid = $db->query($sql)->fetchColumn();
 
     if (empty($levelid))
-        die('NO_' . $levelid);
+        nv_htmlOutput('NO_' . $levelid);
 
     $sql = 'DELETE FROM ' . NV_PREFIXLANG . '_' . $module_data . '_level WHERE levelid = ' . $levelid;
 
@@ -100,7 +100,7 @@ if ($nv_Request->isset_request('delete', 'post')) {
 
         $nv_Cache->delMod($module_name);
     } else {
-        die('NO_' . $levelid);
+        nv_htmlOutput('NO_' . $levelid);
     }
 
     include NV_ROOTDIR . '/includes/header.php';
@@ -181,8 +181,7 @@ if ($nv_Request->isset_request('submit', 'post')) {
                     }
 
                     $nv_Cache->delMod($module_name);
-                    Header('Location: ' . NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=' . $op);
-                    die();
+                    nv_redirect_location(NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=' . $op);
                 } else {
                     $error = $lang_module['errorsave'];
                 }

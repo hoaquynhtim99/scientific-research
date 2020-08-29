@@ -11,7 +11,7 @@
 if (!defined('NV_MOD_SCIENTIFIC_RESEARCH'))
     die('Stop!!!');
 
-$page_title = $module_info['custom_title'];
+$page_title = $module_info['site_title'];
 $key_words = $module_info['keywords'];
 
 $page = $nv_Request->get_int('p', 'get', 1);
@@ -22,8 +22,7 @@ $search['levelid'] = $nv_Request->get_int('l', 'get', 0);
 $search['sectorid'] = $nv_Request->get_int('s', 'get', 0);
 
 if (empty($search['key']) and $nv_Request->isset_request('q', 'get')) {
-    header('Location: ' . nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=' . $op, true));
-    die();
+    nv_redirect_location(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=' . $op);
 }
 
 $request_uri = $_SERVER['REQUEST_URI'];
@@ -42,8 +41,7 @@ if (!empty($search['sectorid'])) {
 $base_url_rewrite = nv_url_rewrite($base_url . ($page > 1 ? '&p=' . $page : ''), true);
 
 if ($request_uri != $base_url_rewrite and NV_MAIN_DOMAIN . $request_uri != $base_url_rewrite) {
-    header('Location: ' . $base_url_rewrite);
-    die();
+    nv_redirect_location($base_url_rewrite);
 }
 
 // Check get data

@@ -101,14 +101,14 @@ if ($nv_Request->isset_request('submit', 'post')) {
             $error = $lang_module['content_error_alias'];
         } else {
             if (!$array['id']) {
-                $sql = 'INSERT INTO ' . NV_PREFIXLANG . '_' . $module_data . '_rows (post_id, levelid, sectorid, title, alias, leader, member, scienceid, down_filepath, down_groups, 
+                $sql = 'INSERT INTO ' . NV_PREFIXLANG . '_' . $module_data . '_rows (post_id, levelid, sectorid, title, alias, leader, member, scienceid, down_filepath, down_groups,
                     doyear, hometext, bodytext, addtime, edittime, status) VALUES (
-                    ' . $array['post_id'] . ', :levelid, :sectorid, :title, :alias, :leader, :member, :scienceid, :down_filepath, :down_groups, 
+                    ' . $array['post_id'] . ', :levelid, :sectorid, :title, :alias, :leader, :member, :scienceid, :down_filepath, :down_groups,
                     :doyear, :hometext, :bodytext, ' . NV_CURRENTTIME . ', ' . NV_CURRENTTIME . ', 1
                 )';
             } else {
-                $sql = 'UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_rows SET 
-                    levelid = :levelid, sectorid = :sectorid, title = :title, alias = :alias, leader = :leader, member = :member, scienceid = :scienceid, down_filepath = :down_filepath, down_groups = :down_groups,  
+                $sql = 'UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_rows SET
+                    levelid = :levelid, sectorid = :sectorid, title = :title, alias = :alias, leader = :leader, member = :member, scienceid = :scienceid, down_filepath = :down_filepath, down_groups = :down_groups,
                     doyear = :doyear, hometext = :hometext, bodytext = :bodytext, edittime = ' . NV_CURRENTTIME . ' WHERE id = ' . $array['id'];
             }
 
@@ -141,8 +141,7 @@ if ($nv_Request->isset_request('submit', 'post')) {
                     }
 
                     $nv_Cache->delMod($module_name);
-                    Header('Location: ' . NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name);
-                    die();
+                    nv_redirect_location(NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name);
                 } else {
                     $error = $lang_module['errorsave'];
                 }

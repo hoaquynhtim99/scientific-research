@@ -8,15 +8,16 @@
  * @Createdate Fri, 10 Jun 2016 02:20:31 GMT
  */
 
-if (!defined('NV_IS_FILE_MODULES'))
+if (!defined('NV_IS_FILE_MODULES')) {
     die('Stop!!!');
+}
 
-$sql_drop_module = array();
-$array_table = array(
+$sql_drop_module = [];
+$array_table = [
     'level',
     'sector',
     'rows'
-);
+];
 $table = $db_config['prefix'] . '_' . $lang . '_' . $module_data;
 $result = $db->query('SHOW TABLE STATUS LIKE ' . $db->quote($table . '_%'));
 while ($item = $result->fetch()) {
@@ -56,7 +57,7 @@ $sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_
  id int(11) unsigned NOT NULL auto_increment,
  levelid smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT 'Cấp độ đề tài',
  sectorid smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT 'Lĩnh vực',
- post_id mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT 'ID người đăng',
+ post_id int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'ID người đăng',
  title varchar(250) NOT NULL DEFAULT '' COMMENT 'Tên đề tài',
  alias varchar(250) NOT NULL DEFAULT '',
  leader varchar(255) NOT NULL DEFAULT '' COMMENT 'Chủ nhiệm',

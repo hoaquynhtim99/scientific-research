@@ -8,8 +8,9 @@
  * @Createdate Fri, 10 Jun 2016 02:20:31 GMT
  */
 
-if (!defined('NV_ADMIN'))
+if (!defined('NV_ADMIN')) {
     die('Stop!!!');
+}
 
 $submenu['content'] = $lang_module['add'];
 $submenu['level'] = $lang_module['level'];

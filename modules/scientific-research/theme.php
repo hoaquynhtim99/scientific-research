@@ -8,12 +8,13 @@
  * @Createdate Fri, 10 Jun 2016 02:20:31 GMT
  */
 
-if (!defined('NV_MOD_SCIENTIFIC_RESEARCH'))
+if (!defined('NV_MOD_SCIENTIFIC_RESEARCH')) {
     die('Stop!!!');
+}
 
 /**
  * nv_main_theme()
- * 
+ *
  * @param mixed $array
  * @param mixed $generate_page
  * @param mixed $is_search
@@ -22,9 +23,9 @@ if (!defined('NV_MOD_SCIENTIFIC_RESEARCH'))
  */
 function nv_main_theme($array, $generate_page, $is_search, $num_items)
 {
-    global $module_file, $lang_module, $module_info, $global_array_level, $global_array_sector;
+    global $lang_module, $module_info, $global_array_level, $global_array_sector;
 
-    $xtpl = new XTemplate('main.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_file);
+    $xtpl = new XTemplate('main.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_info['module_theme']);
     $xtpl->assign('LANG', $lang_module);
 
     foreach ($array as $year => $rows) {
@@ -64,7 +65,7 @@ function nv_main_theme($array, $generate_page, $is_search, $num_items)
 
 /**
  * nv_info_theme()
- * 
+ *
  * @param mixed $message
  * @param mixed $link
  * @param string $type
@@ -72,9 +73,9 @@ function nv_main_theme($array, $generate_page, $is_search, $num_items)
  */
 function nv_info_theme($message, $link, $type = 'info')
 {
-    global $module_file, $lang_module, $module_info;
+    global $lang_module, $module_info;
 
-    $xtpl = new XTemplate('info.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_file);
+    $xtpl = new XTemplate('info.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_info['module_theme']);
     $xtpl->assign('LANG', $lang_module);
     $xtpl->assign('MESSAGE', $message);
     $xtpl->assign('LINK', $link);
@@ -91,15 +92,15 @@ function nv_info_theme($message, $link, $type = 'info')
 
 /**
  * nv_detail_theme()
- * 
+ *
  * @param mixed $row
  * @return
  */
 function nv_detail_theme($row)
 {
-    global $module_file, $lang_module, $module_info, $global_array_level, $global_array_sector;
+    global $lang_module, $module_info, $global_array_level, $global_array_sector;
 
-    $xtpl = new XTemplate('detail.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_file);
+    $xtpl = new XTemplate('detail.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_info['module_theme']);
     $xtpl->assign('LANG', $lang_module);
 
     $row['addtime'] = nv_date("d/m/Y", $row['addtime']);
