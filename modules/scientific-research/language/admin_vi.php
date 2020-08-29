@@ -63,3 +63,12 @@ $lang_module['sector_add'] = 'Thêm lĩnh vực';
 $lang_module['sector_edit'] = 'Sửa lĩnh vực';
 $lang_module['sector_error_title'] = 'Lỗi: Tên lĩnh vực không được để trống';
 $lang_module['sector_error_exists'] = 'Lỗi: Tên lĩnh vực bị trùng';
+
+$lang_module['agencie'] = 'Đơn vị';
+$lang_module['agencie_manager'] = 'Quản lý đơn vị';
+$lang_module['agencie_title'] = 'Tên đơn vị';
+$lang_module['agencie_description'] = 'Giới thiệu';
+$lang_module['agencie_add'] = 'Thêm đơn vị';
+$lang_module['agencie_edit'] = 'Sửa đơn vị';
+$lang_module['agencie_error_title'] = 'Lỗi: Tên đơn vị không được để trống';
+$lang_module['agencie_error_exists'] = 'Lỗi: Liên kết tĩnh bị trùng';

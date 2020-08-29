@@ -15,10 +15,12 @@ if (!defined('NV_ADMIN')) {
 $submenu['content'] = $lang_module['add'];
 $submenu['level'] = $lang_module['level'];
 $submenu['sector'] = $lang_module['sector'];
+$submenu['agencies'] = $lang_module['agencies'];
 
-$allow_func = array(
+$allow_func = [
     'main',
     'content',
     'level',
+    'agencies',
     'sector'
-);
+];

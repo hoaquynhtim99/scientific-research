@@ -57,3 +57,6 @@
 /.buildpath
 /.project
 /.settings
+/.github
+/README.md
+/error.php

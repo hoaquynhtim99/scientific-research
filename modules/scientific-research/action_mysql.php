@@ -14,6 +14,7 @@ if (!defined('NV_IS_FILE_MODULES')) {
 
 $sql_drop_module = [];
 $array_table = [
+    'agencies',
     'level',
     'sector',
     'rows'
@@ -28,6 +29,22 @@ while ($item = $result->fetch()) {
 }
 
 $sql_create_module = $sql_drop_module;
+
+// Đơn vị
+$sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_agencies (
+  id smallint(4) unsigned NOT NULL AUTO_INCREMENT,
+  title varchar(250) NOT NULL DEFAULT '',
+  alias varchar(250) NOT NULL,
+  description text NOT NULL,
+  add_time int(11) unsigned NOT NULL DEFAULT '0',
+  edit_time int(11) unsigned NOT NULL DEFAULT '0',
+  weight smallint(4) unsigned NOT NULL DEFAULT '0',
+  status tinyint(4) NOT NULL DEFAULT '1' COMMENT '0: Dừng, 1: Hoạt động',
+  PRIMARY KEY (id),
+  KEY weight (weight),
+  KEY status (status),
+  UNIQUE KEY alias (alias)
+) ENGINE=MyISAM";
 
 $sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_level (
   levelid smallint(5) unsigned NOT NULL AUTO_INCREMENT,
