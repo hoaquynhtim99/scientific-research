@@ -54,3 +54,6 @@
 !/themes/admin_default/js/scientific-research.js
 !/themes/admin_default/images/scientific-research
 !/themes/admin_default/modules/scientific-research
+/.buildpath
+/.project
+/.settings
