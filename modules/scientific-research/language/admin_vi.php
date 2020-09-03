@@ -28,6 +28,8 @@ $lang_module['function'] = 'Chức năng';
 $lang_module['order'] = 'Thứ tự';
 $lang_module['status'] = 'Hoạt động';
 $lang_module['queue'] = 'Chờ duyệt';
+$lang_module['description'] = 'Mô tả';
+$lang_module['msgnocheck'] = 'Vui lòng chọn ít nhất một dòng để thực hiện';
 
 $lang_module['content_title'] = 'Tên đề tài';
 $lang_module['content_leader'] = 'Chủ nhiệm';
@@ -43,6 +45,7 @@ $lang_module['content_error_title'] = 'Lỗi: Tên đề tài không được đ
 $lang_module['content_error_alias'] = 'Lỗi: Liên kết tĩnh bị trùng';
 $lang_module['content_error_level'] = 'Lỗi: Đề tài chưa có cấp độ';
 $lang_module['content_error_sector'] = 'Lỗi: Đề tài chưa có chuyên mục';
+$lang_module['content_error_agency'] = 'Lỗi: Đề tài chưa có đơn vị';
 $lang_module['content_error_leader'] = 'Lỗi: Đề tài chưa có chủ nhiệm';
 $lang_module['content_error_member'] = 'Lỗi: Đề tài chưa có thành viên';
 $lang_module['content_error_hometext'] = 'Lỗi: Đề tài chưa có giới thiệu ngắn gọn';

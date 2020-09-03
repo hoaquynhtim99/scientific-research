@@ -15,7 +15,7 @@ if (!defined('NV_ADMIN')) {
 $submenu['content'] = $lang_module['add'];
 $submenu['level'] = $lang_module['level'];
 $submenu['sector'] = $lang_module['sector'];
-$submenu['agencies'] = $lang_module['agencies'];
+$submenu['agencies'] = $lang_module['agencie'];
 
 $allow_func = [
     'main',

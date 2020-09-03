@@ -74,6 +74,7 @@ $sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_
  id int(11) unsigned NOT NULL auto_increment,
  levelid smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT 'Cấp độ đề tài',
  sectorid smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT 'Lĩnh vực',
+ agencyid smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT 'Đơn vị',
  post_id int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'ID người đăng',
  title varchar(250) NOT NULL DEFAULT '' COMMENT 'Tên đề tài',
  alias varchar(250) NOT NULL DEFAULT '',
@@ -93,5 +94,6 @@ $sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_
  KEY title (title),
  KEY status (status),
  KEY doyear (doyear),
+ KEY agencyid (agencyid),
  UNIQUE KEY alias (alias)
 ) ENGINE=MyISAM";

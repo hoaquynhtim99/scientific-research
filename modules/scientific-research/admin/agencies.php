@@ -14,6 +14,28 @@ if (!defined('NV_IS_FILE_ADMIN')) {
 
 $page_title = $lang_module['agencie_manager'];
 
+// Lấy liên kết tĩnh
+if ($nv_Request->isset_request('changealias', 'post')) {
+    $title = $nv_Request->get_title('title', 'post', '');
+    $id = $nv_Request->get_int('id', 'post', 0);
+
+    $alias = strtolower(change_alias($title));
+
+    $stmt = $db->prepare('SELECT COUNT(*) FROM ' . NV_PREFIXLANG . '_' . $module_data . '_agencies WHERE id !=' . $id . ' AND alias = :alias');
+    $stmt->bindParam(':alias', $alias, PDO::PARAM_STR);
+    $stmt->execute();
+
+    if ($stmt->fetchColumn()) {
+        $weight = $db->query('SELECT MAX(id) FROM ' . NV_PREFIXLANG . '_' . $module_data . '_agencies')->fetchColumn();
+        $weight = intval($weight) + 1;
+        $alias = $alias . '-' . $weight;
+    }
+
+    include NV_ROOTDIR . '/includes/header.php';
+    echo $alias;
+    include NV_ROOTDIR . '/includes/footer.php';
+}
+
 // Thay đổi thứ tự
 if ($nv_Request->isset_request('changeweight', 'post')) {
     $id = $nv_Request->get_int('id', 'post', 0);
@@ -134,16 +156,18 @@ if (!empty($id)) {
 
 if ($nv_Request->isset_request('submit', 'post')) {
     $array['title'] = $nv_Request->get_title('title', 'post', '');
+    $array['alias'] = $nv_Request->get_title('alias', 'post', '');
     $array['description'] = $nv_Request->get_string('description', 'post', '');
 
     // Xử lý dữ liệu
     $array['description'] = nv_nl2br(nv_htmlspecialchars(strip_tags($array['description'])), '<br />');
+    $array['alias'] = empty($array['alias']) ? change_alias($array['title']) : change_alias($array['alias']);
 
     // Kiểm tra trùng
     $is_exists = false;
-    $sql = 'SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . '_agencies WHERE title = :title' . ($id ? ' AND id != ' . $id : '');
+    $sql = 'SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . '_agencies WHERE alias = :alias' . ($id ? ' AND id != ' . $id : '');
     $sth = $db->prepare($sql);
-    $sth->bindParam(':title', $array['title'], PDO::PARAM_STR);
+    $sth->bindParam(':alias', $array['alias'], PDO::PARAM_STR);
     $sth->execute();
     if ($sth->fetchColumn()) {
         $is_exists = true;
@@ -159,27 +183,28 @@ if ($nv_Request->isset_request('submit', 'post')) {
             $weight = intval($db->query($sql)->fetchColumn()) + 1;
 
             $sql = 'INSERT INTO ' . NV_PREFIXLANG . '_' . $module_data . '_agencies (
-                title, description, weight, add_time, edit_time
+                title, alias, description, weight, add_time, edit_time
             ) VALUES (
-                :title, :description, ' . $weight . ', ' . NV_CURRENTTIME . ', 0
+                :title, :alias, :description, ' . $weight . ', ' . NV_CURRENTTIME . ', 0
             )';
         } else {
             $sql = 'UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_agencies SET
-                title = :title, description = :description, edit_time = ' . NV_CURRENTTIME . '
+                title = :title, alias = :alias, description = :description, edit_time = ' . NV_CURRENTTIME . '
             WHERE id = ' . $id;
         }
 
         try {
             $sth = $db->prepare($sql);
             $sth->bindParam(':title', $array['title'], PDO::PARAM_STR);
+            $sth->bindParam(':alias', $array['alias'], PDO::PARAM_STR);
             $sth->bindParam(':description', $array['description'], PDO::PARAM_STR, strlen($array['description']));
             $sth->execute();
 
             if ($sth->rowCount()) {
                 if ($id) {
-                    nv_insert_logs(NV_LANG_DATA, $module_name, 'LOG_EDIT_agencie', 'ID: ' . $id . ':' . $array['title'], $admin_info['userid']);
+                    nv_insert_logs(NV_LANG_DATA, $module_name, 'LOG_EDIT_AGENCIE', 'ID: ' . $id . ':' . $array['title'], $admin_info['userid']);
                 } else {
-                    nv_insert_logs(NV_LANG_DATA, $module_name, 'LOG_ADD_agencie', $array['title'], $admin_info['userid']);
+                    nv_insert_logs(NV_LANG_DATA, $module_name, 'LOG_ADD_AGENCIE', $array['title'], $admin_info['userid']);
                 }
 
                 $nv_Cache->delMod($module_name);

@@ -24,6 +24,14 @@
                     </td>
                 </tr>
                 <tr>
+                    <td class="text-right text-strong">{LANG.agencie}<span class="fa-required text-danger">(<em class="fa fa-asterisk"></em>)</span></td>
+                    <td>
+                        <select name="agencyid" class="form-control w300">
+                            <!-- BEGIN: agency --><option value="{AGENCY.id}"{AGENCY.selected}>{AGENCY.title}</option><!-- END: agency -->
+                        </select>
+                    </td>
+                </tr>
+                <tr>
                     <td class="text-right text-strong">{LANG.content_title}<span class="fa-required text-danger">(<em class="fa fa-asterisk"></em>)</span></td>
                     <td>
                         <input type="text" id="idtitle" name="title" value="{DATA.title}" class="form-control w500">

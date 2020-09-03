@@ -35,6 +35,7 @@ if (!empty($id)) {
         'id' => 0,
         'levelid' => 0,
         'sectorid' => 0,
+        'agencyid' => 0,
         'post_id' => $admin_info['userid'],
         'title' => '',
         'alias' => '',
@@ -54,6 +55,7 @@ if (!empty($id)) {
 if ($nv_Request->isset_request('submit', 'post')) {
     $array['levelid'] = $nv_Request->get_int('levelid', 'post', 0);
     $array['sectorid'] = $nv_Request->get_int('sectorid', 'post', 0);
+    $array['agencyid'] = $nv_Request->get_int('agencyid', 'post', 0);
     $array['title'] = $nv_Request->get_title('title', 'post', '', true);
     $array['alias'] = $nv_Request->get_title('alias', 'post', '', true);
     $array['leader'] = $nv_Request->get_title('leader', 'post', '', true);
@@ -84,6 +86,8 @@ if ($nv_Request->isset_request('submit', 'post')) {
         $error = $lang_module['content_error_level'];
     } elseif (empty($array['sectorid'])) {
         $error = $lang_module['content_error_sector'];
+    } elseif (empty($array['agencyid'])) {
+        $error = $lang_module['content_error_agency'];
     } elseif (empty($array['title'])) {
         $error = $lang_module['content_error_title'];
     } elseif (empty($array['leader'])) {
@@ -101,15 +105,20 @@ if ($nv_Request->isset_request('submit', 'post')) {
             $error = $lang_module['content_error_alias'];
         } else {
             if (!$array['id']) {
-                $sql = 'INSERT INTO ' . NV_PREFIXLANG . '_' . $module_data . '_rows (post_id, levelid, sectorid, title, alias, leader, member, scienceid, down_filepath, down_groups,
-                    doyear, hometext, bodytext, addtime, edittime, status) VALUES (
-                    ' . $array['post_id'] . ', :levelid, :sectorid, :title, :alias, :leader, :member, :scienceid, :down_filepath, :down_groups,
+                $sql = 'INSERT INTO ' . NV_PREFIXLANG . '_' . $module_data . '_rows (
+                    post_id, levelid, sectorid, agencyid, title, alias, leader, member, scienceid, down_filepath, down_groups,
+                    doyear, hometext, bodytext, addtime, edittime, status
+                ) VALUES (
+                    ' . $array['post_id'] . ', :levelid, :sectorid, :agencyid, :title, :alias,
+                    :leader, :member, :scienceid, :down_filepath, :down_groups,
                     :doyear, :hometext, :bodytext, ' . NV_CURRENTTIME . ', ' . NV_CURRENTTIME . ', 1
                 )';
             } else {
                 $sql = 'UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_rows SET
-                    levelid = :levelid, sectorid = :sectorid, title = :title, alias = :alias, leader = :leader, member = :member, scienceid = :scienceid, down_filepath = :down_filepath, down_groups = :down_groups,
-                    doyear = :doyear, hometext = :hometext, bodytext = :bodytext, edittime = ' . NV_CURRENTTIME . ' WHERE id = ' . $array['id'];
+                    levelid = :levelid, sectorid = :sectorid, agencyid=:agencyid, title = :title, alias = :alias,
+                    leader = :leader, member = :member, scienceid = :scienceid, down_filepath = :down_filepath, down_groups = :down_groups,
+                    doyear = :doyear, hometext = :hometext, bodytext = :bodytext, edittime = ' . NV_CURRENTTIME . '
+                WHERE id = ' . $array['id'];
             }
 
             $array['hometext'] = nv_nl2br($array['hometext']);
@@ -121,6 +130,7 @@ if ($nv_Request->isset_request('submit', 'post')) {
                 $sth = $db->prepare($sql);
                 $sth->bindParam(':levelid', $array['levelid'], PDO::PARAM_INT);
                 $sth->bindParam(':sectorid', $array['sectorid'], PDO::PARAM_INT);
+                $sth->bindParam(':agencyid', $array['agencyid'], PDO::PARAM_INT);
                 $sth->bindParam(':title', $array['title'], PDO::PARAM_STR);
                 $sth->bindParam(':alias', $array['alias'], PDO::PARAM_STR);
                 $sth->bindParam(':leader', $array['leader'], PDO::PARAM_STR);
@@ -216,6 +226,13 @@ foreach ($global_array_sector as $sector) {
 
     $xtpl->assign('SECTOR', $sector);
     $xtpl->parse('main.sector');
+}
+
+foreach ($global_array_agencies as $agency) {
+    $agency['selected'] = $agency['id'] == $array['agencyid'] ? ' selected="selected"' : '';
+
+    $xtpl->assign('AGENCY', $agency);
+    $xtpl->parse('main.agency');
 }
 
 if (!empty($error)) {
