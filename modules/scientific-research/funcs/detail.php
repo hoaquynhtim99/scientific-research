@@ -8,8 +8,9 @@
  * @Createdate Fri, 10 Jun 2016 02:20:31 GMT
  */
 
-if (!defined('NV_MOD_SCIENTIFIC_RESEARCH'))
+if (!defined('NV_MOD_SCIENTIFIC_RESEARCH')) {
     die('Stop!!!');
+}
 
 $sql = 'SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . '_rows WHERE status = 1 AND alias = :alias';
 $sth = $db->prepare($sql);
@@ -26,6 +27,16 @@ $page_title = $row['title'];
 $description = empty($row['hometext']) ? 'no' : $row['hometext'];
 
 $row['link'] = NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=' . $row['alias'] . $global_config['rewrite_exturl'];
+$catid = 0;
+
+if (isset($global_array_agencies[$row['agencyid']])) {
+    $catid = $row['agencyid'];
+    $array_mod_title[] = [
+        'catid' => $catid,
+        'title' => $global_array_agencies[$row['agencyid']]['title'],
+        'link' => NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=' . $global_array_agencies[$row['agencyid']]['alias']
+    ];
+}
 
 if (isset($array_op[1]) and $array_op[1] == 'download') {
     if (empty($row['down_filepath']) or !file_exists(NV_UPLOADS_REAL_DIR . '/' . $module_upload . '/files/' . $row['down_filepath'])) {

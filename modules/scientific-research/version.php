@@ -14,7 +14,7 @@ if (!defined('NV_ADMIN') or !defined('NV_MAINFILE')) {
 
 $module_version = [
     'name' => 'Scientific Research',
-    'modfuncs' => 'main,level,sector,rss,detail,search',
+    'modfuncs' => 'main,level,sector,rss,detail,search,viewcat',
     'is_sysmod' => 0,
     'virtual' => 1,
     'version' => '4.4.02',

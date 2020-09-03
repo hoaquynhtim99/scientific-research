@@ -12,19 +12,24 @@ if (!defined('NV_MOD_SCIENTIFIC_RESEARCH')) {
     die('Stop!!!');
 }
 
-$page_title = $module_info['site_title'];
+// Chống điền trực tiếp link viewcat
+if (empty($catid)) {
+    nv_redirect_location(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name);
+}
+
+$page_title = $lang_module['content_title1'] . ' ' . $global_array_agencies[$catid]['title'];
 $key_words = $module_info['keywords'];
 
-$db->sqlreset()->select('COUNT(*)')->from(NV_PREFIXLANG . '_' . $module_data . '_rows')->where('status = 1');
+$db->sqlreset()->select('COUNT(*)')->from(NV_PREFIXLANG . '_' . $module_data . '_rows')->where('status=1 AND agencyid=' . $catid);
 
 $num_items = $db->query($db->sql())->fetchColumn();
 
 $db->select('id, levelid, sectorid, agencyid, title, alias, leader, member, scienceid, down_filepath, down_groups, doyear, addtime, edittime');
-$db->order('doyear DESC, id DESC')->limit($per_page)->offset(($page - 1) * $per_page);
+$db->order('id DESC')->limit($per_page)->offset(($page - 1) * $per_page);
 
 $result = $db->query($db->sql());
 $array = [];
-$base_url = NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name;
+$base_url = NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=' . $global_array_agencies[$catid]['alias'];
 
 // Phân đề tài theo năm
 $stt = (($page - 1) * $per_page) + 1;

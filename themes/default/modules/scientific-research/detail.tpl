@@ -20,6 +20,12 @@
             <th class="text-right">{LANG.content_sector}</th>
             <td>{ROW.sector}</td>
         </tr>
+        <tr>
+            <th class="text-right">{LANG.agency}</th>
+            <td colspan="3">
+                <a href="{ROW.agency_link}">{ROW.agency}</a>
+            </td>
+        </tr>
     </tbody>
 </table>
 <div class="bodytext">{ROW.bodytext}</div>

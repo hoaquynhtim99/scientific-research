@@ -7,22 +7,22 @@
         <input type="hidden" name="{NV_OP_VARIABLE}" value="{OP}">
         <!-- END: no_rewrite -->
         <div class="row clearfix">
-            <div class="col-sm-8">
+            <div class="col-sm-8 col-md-8">
                 <input type="text" class="form-control mb0" name="q" value="{SEARCH_KEY}" placeholder="{LANG.search_q}">
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-6 col-md-6">
                 <select class="form-control mb0" name="l">
                     <option value="0">{LANG.search_level_all}</option>
                     <!-- BEGIN: level --><option value="{LEVEL.levelid}"{LEVEL.selected}>{LEVEL.title}</option><!-- END: level -->
                 </select>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-6 col-md-6">
                 <select class="form-control mb0" name="s">
                     <option value="0">{LANG.search_sector_all}</option>
                     <!-- BEGIN: sector --><option value="{SECTOR.sectorid}"{SECTOR.selected}>{SECTOR.title}</option><!-- END: sector -->
                 </select>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-4 col-md-4">
                 <input type="submit" name="submit" value="{LANG.search}" class="btn btn-warning btn-block">
             </div>
         </div>

@@ -23,7 +23,7 @@ if (!defined('NV_MOD_SCIENTIFIC_RESEARCH')) {
  */
 function nv_main_theme($array, $generate_page, $is_search, $num_items)
 {
-    global $lang_module, $module_info, $global_array_level, $global_array_sector;
+    global $lang_module, $module_info, $global_array_level, $global_array_sector, $global_array_agencies;
 
     $xtpl = new XTemplate('main.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_info['module_theme']);
     $xtpl->assign('LANG', $lang_module);
@@ -36,6 +36,7 @@ function nv_main_theme($array, $generate_page, $is_search, $num_items)
             $row['edittime'] = nv_date("d/m/Y", $row['edittime']);
             $row['level'] = isset($global_array_level[$row['levelid']]) ? $global_array_level[$row['levelid']]['title'] : 'N/A';
             $row['sector'] = isset($global_array_sector[$row['sectorid']]) ? $global_array_sector[$row['sectorid']]['title'] : 'N/A';
+            $row['agency'] = isset($global_array_agencies[$row['agencyid']]) ? $global_array_agencies[$row['agencyid']]['title'] : 'N/A';
 
             $xtpl->assign('ROW', $row);
 
@@ -91,14 +92,13 @@ function nv_info_theme($message, $link, $type = 'info')
 }
 
 /**
- * nv_detail_theme()
  *
  * @param mixed $row
  * @return
  */
 function nv_detail_theme($row)
 {
-    global $lang_module, $module_info, $global_array_level, $global_array_sector;
+    global $lang_module, $module_info, $global_array_level, $global_array_sector, $global_array_agencies, $module_name;
 
     $xtpl = new XTemplate('detail.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_info['module_theme']);
     $xtpl->assign('LANG', $lang_module);
@@ -108,6 +108,12 @@ function nv_detail_theme($row)
     $row['level'] = isset($global_array_level[$row['levelid']]) ? $global_array_level[$row['levelid']]['title'] : 'N/A';
     $row['sector'] = isset($global_array_sector[$row['sectorid']]) ? $global_array_sector[$row['sectorid']]['title'] : 'N/A';
     $row['scienceid'] = empty($row['scienceid']) ? 'N/A' : $row['scienceid'];
+    $row['agency'] = isset($global_array_agencies[$row['agencyid']]) ? $global_array_agencies[$row['agencyid']]['title'] : 'N/A';
+    if (isset($global_array_agencies[$row['agencyid']])) {
+        $row['agency_link'] = NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=' . $global_array_agencies[$row['agencyid']]['alias'];
+    } else {
+        $row['agency_link'] = '#';
+    }
 
     $xtpl->assign('ROW', $row);
 

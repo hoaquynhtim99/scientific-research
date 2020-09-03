@@ -9,8 +9,9 @@
  * @Createdate Fri, 10 Jun 2016 02:20:31 GMT
  */
 
-if (!defined('NV_MAINFILE'))
+if (!defined('NV_MAINFILE')) {
     die('Stop!!!');
+}
 
 $lang_translator['author'] = 'VINADES.,JSC (contact@vinades.vn)';
 $lang_translator['createdate'] = '04/03/2010, 15:22';
@@ -23,8 +24,10 @@ $lang_module['edittime'] = 'Cập nhật';
 $lang_module['person'] = 'Ứng viên';
 $lang_module['stt'] = 'STT';
 $lang_module['download'] = 'Tải về';
+$lang_module['agency'] = 'Đơn vị';
 
 $lang_module['content_title'] = 'Tên đề tài';
+$lang_module['content_title1'] = 'Đề tài';
 $lang_module['content_user'] = 'Nhân sự';
 $lang_module['content_leader'] = 'Chủ nhiệm';
 $lang_module['content_member'] = 'Thành viên';
